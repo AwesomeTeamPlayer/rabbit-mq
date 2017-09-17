@@ -1,0 +1,89 @@
+{
+  "rabbit_version": "3.6.12",
+  "users": [
+    {
+      "name": "guest",
+      "password_hash": "Eo4FFCkrbmBrPbC+tPdrEZjR71YscJRCMAReo100LwTUAqUJ",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "parameters": [],
+  "global_parameters": [
+    {
+      "name": "cluster_name",
+      "value": "rabbit@163511d1920a"
+    }
+  ],
+  "policies": [],
+  "queues": [
+    {
+      "name": "to_source_listener",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },{
+      "name": "to_wall",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },{
+      "name": "to_push_notifications",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "events",
+      "vhost": "/",
+      "type": "fanout",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "events",
+      "vhost": "/",
+      "destination": "to_source_listener",
+      "destination_type": "queue",
+      "routing_key": "*",
+      "arguments": {}
+    },{
+      "source": "events",
+      "vhost": "/",
+      "destination": "to_wall",
+      "destination_type": "queue",
+      "routing_key": "*",
+      "arguments": {}
+    },{
+      "source": "events",
+      "vhost": "/",
+      "destination": "to_push_notifications",
+      "destination_type": "queue",
+      "routing_key": "*",
+      "arguments": {}
+    },
+  ]
+}
