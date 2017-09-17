@@ -1,10 +1,15 @@
 sudo: required
 
+language: ruby
+
 services:
   - docker
 
 before_install:
   - docker build -t awesometeamplayer/rabbit-mq .
+
+script:
+  - bundle exec rake test
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
